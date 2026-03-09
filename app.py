@@ -12,7 +12,8 @@ client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
 historial = {}
 
 def hablar_con_jarvis(numero, mensaje):
-    fecha_actual = datetime.now().strftime("%A, %d de %B de %Y - %H:%M")
+    zona_colombia = pytz.timezone("America/Bogota")
+    fecha_actual = datetime.now(zona_colombia).strftime("%A, %d de %B de %Y - %H:%M")
 
     if numero not in historial:
         historial[numero] = []
@@ -68,4 +69,5 @@ def home():
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(debug=False, host="0.0.0.0", port=port)
+
 
